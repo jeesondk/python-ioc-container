@@ -31,6 +31,7 @@ class TestBasicRegistration:
 
     def test_transient_registration(self) -> None:
         """Test registering a transient service."""
+
         class Service:
             pass
 
@@ -43,6 +44,7 @@ class TestBasicRegistration:
 
     def test_singleton_registration(self) -> None:
         """Test registering a singleton service."""
+
         class Service:
             pass
 
@@ -55,6 +57,7 @@ class TestBasicRegistration:
 
     def test_scoped_registration(self) -> None:
         """Test registering a scoped service."""
+
         class Service:
             pass
 
@@ -71,6 +74,7 @@ class TestBasicRegistration:
 
     def test_instance_registration(self) -> None:
         """Test registering an existing instance."""
+
         class Service:
             def __init__(self, value: str):
                 self.value = value
@@ -88,6 +92,7 @@ class TestAbstractBaseClasses:
 
     def test_abc_with_implementation(self) -> None:
         """Test registering an ABC with a concrete implementation."""
+
         class Repository(ABC):
             @abstractmethod
             def get(self, id: int) -> dict: ...
@@ -108,6 +113,7 @@ class TestDependencyInjection:
 
     def test_simple_dependency_injection(self) -> None:
         """Test injecting a single dependency."""
+
         class Database:
             def query(self) -> str:
                 return "result"
@@ -116,11 +122,7 @@ class TestDependencyInjection:
             def __init__(self, db: Database):
                 self.db = db
 
-        container = (
-            Container()
-            .singleton(Database)
-            .transient(Service)
-        )
+        container = Container().singleton(Database).transient(Service)
 
         service = container.resolve(Service)
         assert isinstance(service.db, Database)
@@ -128,6 +130,7 @@ class TestDependencyInjection:
 
     def test_multiple_dependencies(self) -> None:
         """Test injecting multiple dependencies."""
+
         class Logger:
             def log(self, msg: str) -> str:
                 return f"LOG: {msg}"
@@ -140,12 +143,7 @@ class TestDependencyInjection:
                 self.db = db
                 self.logger = logger
 
-        container = (
-            Container()
-            .singleton(Database)
-            .singleton(Logger)
-            .transient(Service)
-        )
+        container = Container().singleton(Database).singleton(Logger).transient(Service)
 
         service = container.resolve(Service)
         assert isinstance(service.db, Database)
@@ -154,6 +152,7 @@ class TestDependencyInjection:
 
     def test_nested_dependencies(self) -> None:
         """Test resolving nested dependencies."""
+
         class Config:
             def get(self, key: str) -> str:
                 return "value"
@@ -166,12 +165,7 @@ class TestDependencyInjection:
             def __init__(self, db: Database):
                 self.db = db
 
-        container = (
-            Container()
-            .singleton(Config)
-            .singleton(Database)
-            .transient(Service)
-        )
+        container = Container().singleton(Config).singleton(Database).transient(Service)
 
         service = container.resolve(Service)
         assert isinstance(service.db, Database)
@@ -184,6 +178,7 @@ class TestFactoryRegistration:
 
     def test_factory_function(self) -> None:
         """Test registering a factory function."""
+
         class Config:
             def __init__(self, value: str):
                 self.value = value
@@ -199,6 +194,7 @@ class TestFactoryRegistration:
 
     def test_factory_with_dependencies(self) -> None:
         """Test factory function with injected dependencies."""
+
         class Config:
             def __init__(self):
                 self.db_url = "postgresql://localhost/db"
@@ -251,6 +247,7 @@ class TestDecorators:
 
     def test_simple_decorator(self) -> None:
         """Test applying a decorator to a service."""
+
         class Repository(ABC):
             @abstractmethod
             def get(self, id: int) -> dict: ...
@@ -286,6 +283,7 @@ class TestDecorators:
 
     def test_decorator_with_additional_dependencies(self) -> None:
         """Test decorator with its own dependencies."""
+
         class Cache:
             def __init__(self):
                 self.store = {}
@@ -321,6 +319,7 @@ class TestDecorators:
 
     def test_multiple_decorators(self) -> None:
         """Test applying multiple decorators."""
+
         class Service(ABC):
             @abstractmethod
             def execute(self) -> str: ...
@@ -360,6 +359,7 @@ class TestValidation:
 
     def test_validation_success(self) -> None:
         """Test validation passes for valid configuration."""
+
         class Database:
             pass
 
@@ -367,17 +367,14 @@ class TestValidation:
             def __init__(self, db: Database):
                 self.db = db
 
-        container = (
-            Container()
-            .singleton(Database)
-            .transient(Service)
-        )
+        container = Container().singleton(Database).transient(Service)
 
         # Should not raise
         container.validate()
 
     def test_missing_dependency_error(self) -> None:
         """Test validation detects missing dependencies."""
+
         class UnregisteredService:
             pass
 
@@ -394,11 +391,7 @@ class TestValidation:
 
     def test_circular_dependency_error(self) -> None:
         """Test validation detects circular dependencies."""
-        container = (
-            Container()
-            .transient(CircularServiceA)
-            .transient(CircularServiceB)
-        )
+        container = Container().transient(CircularServiceA).transient(CircularServiceB)
 
         # Circular dependencies are detected during validation
         with pytest.raises(CircularDependencyError) as exc_info:
@@ -408,6 +401,7 @@ class TestValidation:
 
     def test_lifetime_mismatch_error(self) -> None:
         """Test validation detects lifetime mismatches."""
+
         class ScopedService:
             pass
 
@@ -415,11 +409,7 @@ class TestValidation:
             def __init__(self, scoped: ScopedService):
                 self.scoped = scoped
 
-        container = (
-            Container()
-            .scoped(ScopedService)
-            .singleton(SingletonService)
-        )
+        container = Container().scoped(ScopedService).singleton(SingletonService)
 
         with pytest.raises(ContainerError) as exc_info:
             container.validate()
@@ -434,6 +424,7 @@ class TestScope:
 
     def test_scope_isolation(self) -> None:
         """Test that scopes are isolated from each other."""
+
         class Service:
             pass
 
@@ -449,6 +440,7 @@ class TestScope:
 
     def test_scope_reuse_within_scope(self) -> None:
         """Test that scoped services are reused within the same scope."""
+
         class Service:
             pass
 
@@ -461,6 +453,7 @@ class TestScope:
 
     def test_singleton_shared_across_scopes(self) -> None:
         """Test that singletons are shared across scopes."""
+
         class Service:
             pass
 
@@ -476,6 +469,7 @@ class TestScope:
 
     def test_resolve_optional(self) -> None:
         """Test resolve_optional returns None for unregistered services."""
+
         class Service:
             pass
 
@@ -487,6 +481,7 @@ class TestScope:
 
     def test_resolve_optional_returns_service(self) -> None:
         """Test resolve_optional returns service if registered."""
+
         class Service:
             pass
 
@@ -503,6 +498,7 @@ class TestEdgeCases:
 
     def test_resolve_unregistered_service(self) -> None:
         """Test resolving unregistered service raises error."""
+
         class Service:
             pass
 
@@ -513,6 +509,7 @@ class TestEdgeCases:
 
     def test_service_with_no_dependencies(self) -> None:
         """Test service with no constructor dependencies."""
+
         class Service:
             def __init__(self):
                 self.value = "test"
@@ -524,6 +521,7 @@ class TestEdgeCases:
 
     def test_chaining_registrations(self) -> None:
         """Test chaining multiple registrations."""
+
         class ServiceA:
             pass
 
@@ -533,12 +531,7 @@ class TestEdgeCases:
         class ServiceC:
             pass
 
-        container = (
-            Container()
-            .singleton(ServiceA)
-            .scoped(ServiceB)
-            .transient(ServiceC)
-        )
+        container = Container().singleton(ServiceA).scoped(ServiceB).transient(ServiceC)
 
         a = container.resolve(ServiceA)
         with container.scope() as scope:
@@ -551,6 +544,7 @@ class TestEdgeCases:
 
     def test_decorate_unregistered_service_raises_error(self) -> None:
         """Test decorating an unregistered service raises error."""
+
         class Service(ABC):
             pass
 

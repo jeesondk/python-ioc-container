@@ -1,0 +1,575 @@
+Starting publish process...
+Running tests and checks...
+flake8 python_ioc tests
+mypy python_ioc
+Success: no issues found in 9 source files
+pytest
+============================= test session starts ==============================
+platform darwin -- Python 3.14.0, pytest-9.0.2, pluggy-1.6.0 -- /Users/jesper/work/python-ioc/.venv/bin/python
+cachedir: .pytest_cache
+rootdir: /Users/jesper/work/python-ioc
+configfile: pyproject.toml
+testpaths: tests
+plugins: cov-7.0.0
+collected 28 items
+tests/test_container.py::TestBasicRegistration::test_container_initialization PASSED [  3%]
+tests/test_container.py::TestBasicRegistration::test_transient_registration PASSED [  7%]
+tests/test_container.py::TestBasicRegistration::test_singleton_registration PASSED [ 10%]
+tests/test_container.py::TestBasicRegistration::test_scoped_registration PASSED [ 14%]
+tests/test_container.py::TestBasicRegistration::test_instance_registration PASSED [ 17%]
+tests/test_container.py::TestAbstractBaseClasses::test_abc_with_implementation PASSED [ 21%]
+tests/test_container.py::TestDependencyInjection::test_simple_dependency_injection PASSED [ 25%]
+tests/test_container.py::TestDependencyInjection::test_multiple_dependencies PASSED [ 28%]
+tests/test_container.py::TestDependencyInjection::test_nested_dependencies PASSED [ 32%]
+tests/test_container.py::TestFactoryRegistration::test_factory_function PASSED [ 35%]
+tests/test_container.py::TestFactoryRegistration::test_factory_with_dependencies PASSED [ 39%]
+tests/test_container.py::TestFactoryRegistration::test_factory_lifetime PASSED [ 42%]
+tests/test_container.py::TestDecorators::test_simple_decorator PASSED    [ 46%]
+tests/test_container.py::TestDecorators::test_decorator_with_additional_dependencies PASSED [ 50%]
+tests/test_container.py::TestDecorators::test_multiple_decorators PASSED [ 53%]
+tests/test_container.py::TestValidation::test_validation_success PASSED  [ 57%]
+tests/test_container.py::TestValidation::test_missing_dependency_error PASSED [ 60%]
+tests/test_container.py::TestValidation::test_circular_dependency_error PASSED [ 64%]
+tests/test_container.py::TestValidation::test_lifetime_mismatch_error PASSED [ 67%]
+tests/test_container.py::TestScope::test_scope_isolation PASSED          [ 71%]
+tests/test_container.py::TestScope::test_scope_reuse_within_scope PASSED [ 75%]
+tests/test_container.py::TestScope::test_singleton_shared_across_scopes PASSED [ 78%]
+tests/test_container.py::TestScope::test_resolve_optional PASSED         [ 82%]
+tests/test_container.py::TestScope::test_resolve_optional_returns_service PASSED [ 85%]
+tests/test_container.py::TestEdgeCases::test_resolve_unregistered_service PASSED [ 89%]
+tests/test_container.py::TestEdgeCases::test_service_with_no_dependencies PASSED [ 92%]
+tests/test_container.py::TestEdgeCases::test_chaining_registrations PASSED [ 96%]
+tests/test_container.py::TestEdgeCases::test_decorate_unregistered_service_raises_error PASSED [100%]
+================================ tests coverage ================================
+_______________ coverage: platform darwin, python 3.14.0-final-0 _______________
+Name                                             Stmts   Miss  Cover   Missing
+------------------------------------------------------------------------------
+python_ioc/__init__.py                               7      0   100%
+python_ioc/_service_descriptor.py                   10      0   100%
+python_ioc/container.py                            152     24    84%   146, 180, 183, 189, 209-215, 225-227, 256-259, 273, 313, 317, 336-337, 350, 373-374
+python_ioc/errors/__init__.py                        4      0   100%
+python_ioc/errors/circular_dependency_error.py       6      0   100%
+python_ioc/errors/container_error.py                 2      0   100%
+python_ioc/errors/missing_dependency_error.py        9      0   100%
+python_ioc/lifetime.py                               5      0   100%
+python_ioc/scope.py                                 18      0   100%
+------------------------------------------------------------------------------
+TOTAL                                              213     24    89%
+Coverage HTML written to dir htmlcov
+============================== 28 passed in 0.06s ==============================
+Building the package...
+rm -rf build/
+rm -rf dist/
+rm -rf *.egg-info
+rm -rf .pytest_cache
+rm -rf .coverage
+rm -rf htmlcov/
+find . -type d -name __pycache__ -exec rm -rf {} +
+find . -type f -name '*.pyc' -delete
+python -m build
+* Creating isolated environment: venv+pip...
+* Installing packages in isolated environment:
+  - setuptools>=61.0
+  - wheel
+* Getting build dependencies for sdist...
+/private/var/folders/zz/p85ds1zx3tq9rt7fd3rh5g240000gn/T/build-env-42zh1pd5/lib/python3.14/site-packages/setuptools/config/_apply_pyprojecttoml.py:82: SetuptoolsDeprecationWarning: `project.license` as a TOML table is deprecated
+!!
+        ********************************************************************************
+        Please use a simple string containing a SPDX expression for `project.license`. You can also use `project.license-files`. (Both options available on setuptools>=77.0.0).
+        By 2026-Feb-18, you need to update your project and remove deprecated calls
+        or your builds will no longer be supported.
+        See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+        ********************************************************************************
+!!
+  corresp(dist, value, root_dir)
+/private/var/folders/zz/p85ds1zx3tq9rt7fd3rh5g240000gn/T/build-env-42zh1pd5/lib/python3.14/site-packages/setuptools/config/_apply_pyprojecttoml.py:61: SetuptoolsDeprecationWarning: License classifiers are deprecated.
+!!
+        ********************************************************************************
+        Please consider removing the following classifiers in favor of a SPDX license expression:
+        License :: OSI Approved :: MIT License
+        See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+        ********************************************************************************
+!!
+  dist._finalize_license_expression()
+/private/var/folders/zz/p85ds1zx3tq9rt7fd3rh5g240000gn/T/build-env-42zh1pd5/lib/python3.14/site-packages/setuptools/dist.py:759: SetuptoolsDeprecationWarning: License classifiers are deprecated.
+!!
+        ********************************************************************************
+        Please consider removing the following classifiers in favor of a SPDX license expression:
+        License :: OSI Approved :: MIT License
+        See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+        ********************************************************************************
+!!
+  self._finalize_license_expression()
+running egg_info
+creating python_ioc.egg-info
+writing python_ioc.egg-info/PKG-INFO
+writing dependency_links to python_ioc.egg-info/dependency_links.txt
+writing requirements to python_ioc.egg-info/requires.txt
+writing top-level names to python_ioc.egg-info/top_level.txt
+writing manifest file 'python_ioc.egg-info/SOURCES.txt'
+reading manifest file 'python_ioc.egg-info/SOURCES.txt'
+reading manifest template 'MANIFEST.in'
+adding license file 'LICENSE'
+writing manifest file 'python_ioc.egg-info/SOURCES.txt'
+* Building sdist...
+/private/var/folders/zz/p85ds1zx3tq9rt7fd3rh5g240000gn/T/build-env-42zh1pd5/lib/python3.14/site-packages/setuptools/config/_apply_pyprojecttoml.py:82: SetuptoolsDeprecationWarning: `project.license` as a TOML table is deprecated
+!!
+        ********************************************************************************
+        Please use a simple string containing a SPDX expression for `project.license`. You can also use `project.license-files`. (Both options available on setuptools>=77.0.0).
+        By 2026-Feb-18, you need to update your project and remove deprecated calls
+        or your builds will no longer be supported.
+        See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+        ********************************************************************************
+!!
+  corresp(dist, value, root_dir)
+/private/var/folders/zz/p85ds1zx3tq9rt7fd3rh5g240000gn/T/build-env-42zh1pd5/lib/python3.14/site-packages/setuptools/config/_apply_pyprojecttoml.py:61: SetuptoolsDeprecationWarning: License classifiers are deprecated.
+!!
+        ********************************************************************************
+        Please consider removing the following classifiers in favor of a SPDX license expression:
+        License :: OSI Approved :: MIT License
+        See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+        ********************************************************************************
+!!
+  dist._finalize_license_expression()
+/private/var/folders/zz/p85ds1zx3tq9rt7fd3rh5g240000gn/T/build-env-42zh1pd5/lib/python3.14/site-packages/setuptools/dist.py:759: SetuptoolsDeprecationWarning: License classifiers are deprecated.
+!!
+        ********************************************************************************
+        Please consider removing the following classifiers in favor of a SPDX license expression:
+        License :: OSI Approved :: MIT License
+        See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+        ********************************************************************************
+!!
+  self._finalize_license_expression()
+running sdist
+running egg_info
+writing python_ioc.egg-info/PKG-INFO
+writing dependency_links to python_ioc.egg-info/dependency_links.txt
+writing requirements to python_ioc.egg-info/requires.txt
+writing top-level names to python_ioc.egg-info/top_level.txt
+reading manifest file 'python_ioc.egg-info/SOURCES.txt'
+reading manifest template 'MANIFEST.in'
+adding license file 'LICENSE'
+writing manifest file 'python_ioc.egg-info/SOURCES.txt'
+running check
+creating python_ioc-0.1.0
+creating python_ioc-0.1.0/python_ioc
+creating python_ioc-0.1.0/python_ioc.egg-info
+creating python_ioc-0.1.0/python_ioc/errors
+creating python_ioc-0.1.0/tests
+copying files to python_ioc-0.1.0...
+copying LICENSE -> python_ioc-0.1.0
+copying MANIFEST.in -> python_ioc-0.1.0
+copying README.md -> python_ioc-0.1.0
+copying pyproject.toml -> python_ioc-0.1.0
+copying setup.py -> python_ioc-0.1.0
+copying python_ioc/__init__.py -> python_ioc-0.1.0/python_ioc
+copying python_ioc/_service_descriptor.py -> python_ioc-0.1.0/python_ioc
+copying python_ioc/container.py -> python_ioc-0.1.0/python_ioc
+copying python_ioc/lifetime.py -> python_ioc-0.1.0/python_ioc
+copying python_ioc/scope.py -> python_ioc-0.1.0/python_ioc
+copying python_ioc.egg-info/PKG-INFO -> python_ioc-0.1.0/python_ioc.egg-info
+copying python_ioc.egg-info/SOURCES.txt -> python_ioc-0.1.0/python_ioc.egg-info
+copying python_ioc.egg-info/dependency_links.txt -> python_ioc-0.1.0/python_ioc.egg-info
+copying python_ioc.egg-info/requires.txt -> python_ioc-0.1.0/python_ioc.egg-info
+copying python_ioc.egg-info/top_level.txt -> python_ioc-0.1.0/python_ioc.egg-info
+copying python_ioc/errors/__init__.py -> python_ioc-0.1.0/python_ioc/errors
+copying python_ioc/errors/circular_dependency_error.py -> python_ioc-0.1.0/python_ioc/errors
+copying python_ioc/errors/container_error.py -> python_ioc-0.1.0/python_ioc/errors
+copying python_ioc/errors/missing_dependency_error.py -> python_ioc-0.1.0/python_ioc/errors
+copying tests/__init__.py -> python_ioc-0.1.0/tests
+copying tests/test_container.py -> python_ioc-0.1.0/tests
+copying python_ioc.egg-info/SOURCES.txt -> python_ioc-0.1.0/python_ioc.egg-info
+Writing python_ioc-0.1.0/setup.cfg
+Creating tar archive
+removing 'python_ioc-0.1.0' (and everything under it)
+* Building wheel from sdist
+* Creating isolated environment: venv+pip...
+* Installing packages in isolated environment:
+  - setuptools>=61.0
+  - wheel
+* Getting build dependencies for wheel...
+/private/var/folders/zz/p85ds1zx3tq9rt7fd3rh5g240000gn/T/build-env-s8u822bu/lib/python3.14/site-packages/setuptools/config/_apply_pyprojecttoml.py:82: SetuptoolsDeprecationWarning: `project.license` as a TOML table is deprecated
+!!
+        ********************************************************************************
+        Please use a simple string containing a SPDX expression for `project.license`. You can also use `project.license-files`. (Both options available on setuptools>=77.0.0).
+        By 2026-Feb-18, you need to update your project and remove deprecated calls
+        or your builds will no longer be supported.
+        See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+        ********************************************************************************
+!!
+  corresp(dist, value, root_dir)
+/private/var/folders/zz/p85ds1zx3tq9rt7fd3rh5g240000gn/T/build-env-s8u822bu/lib/python3.14/site-packages/setuptools/config/_apply_pyprojecttoml.py:61: SetuptoolsDeprecationWarning: License classifiers are deprecated.
+!!
+        ********************************************************************************
+        Please consider removing the following classifiers in favor of a SPDX license expression:
+        License :: OSI Approved :: MIT License
+        See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+        ********************************************************************************
+!!
+  dist._finalize_license_expression()
+/private/var/folders/zz/p85ds1zx3tq9rt7fd3rh5g240000gn/T/build-env-s8u822bu/lib/python3.14/site-packages/setuptools/dist.py:759: SetuptoolsDeprecationWarning: License classifiers are deprecated.
+!!
+        ********************************************************************************
+        Please consider removing the following classifiers in favor of a SPDX license expression:
+        License :: OSI Approved :: MIT License
+        See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+        ********************************************************************************
+!!
+  self._finalize_license_expression()
+running egg_info
+writing python_ioc.egg-info/PKG-INFO
+writing dependency_links to python_ioc.egg-info/dependency_links.txt
+writing requirements to python_ioc.egg-info/requires.txt
+writing top-level names to python_ioc.egg-info/top_level.txt
+reading manifest file 'python_ioc.egg-info/SOURCES.txt'
+reading manifest template 'MANIFEST.in'
+adding license file 'LICENSE'
+writing manifest file 'python_ioc.egg-info/SOURCES.txt'
+* Building wheel...
+/private/var/folders/zz/p85ds1zx3tq9rt7fd3rh5g240000gn/T/build-env-s8u822bu/lib/python3.14/site-packages/setuptools/config/_apply_pyprojecttoml.py:82: SetuptoolsDeprecationWarning: `project.license` as a TOML table is deprecated
+!!
+        ********************************************************************************
+        Please use a simple string containing a SPDX expression for `project.license`. You can also use `project.license-files`. (Both options available on setuptools>=77.0.0).
+        By 2026-Feb-18, you need to update your project and remove deprecated calls
+        or your builds will no longer be supported.
+        See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+        ********************************************************************************
+!!
+  corresp(dist, value, root_dir)
+/private/var/folders/zz/p85ds1zx3tq9rt7fd3rh5g240000gn/T/build-env-s8u822bu/lib/python3.14/site-packages/setuptools/config/_apply_pyprojecttoml.py:61: SetuptoolsDeprecationWarning: License classifiers are deprecated.
+!!
+        ********************************************************************************
+        Please consider removing the following classifiers in favor of a SPDX license expression:
+        License :: OSI Approved :: MIT License
+        See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+        ********************************************************************************
+!!
+  dist._finalize_license_expression()
+/private/var/folders/zz/p85ds1zx3tq9rt7fd3rh5g240000gn/T/build-env-s8u822bu/lib/python3.14/site-packages/setuptools/dist.py:759: SetuptoolsDeprecationWarning: License classifiers are deprecated.
+!!
+        ********************************************************************************
+        Please consider removing the following classifiers in favor of a SPDX license expression:
+        License :: OSI Approved :: MIT License
+        See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+        ********************************************************************************
+!!
+  self._finalize_license_expression()
+running bdist_wheel
+running build
+running build_py
+creating build/lib/python_ioc
+copying python_ioc/lifetime.py -> build/lib/python_ioc
+copying python_ioc/__init__.py -> build/lib/python_ioc
+copying python_ioc/container.py -> build/lib/python_ioc
+copying python_ioc/_service_descriptor.py -> build/lib/python_ioc
+copying python_ioc/scope.py -> build/lib/python_ioc
+creating build/lib/python_ioc/errors
+copying python_ioc/errors/circular_dependency_error.py -> build/lib/python_ioc/errors
+copying python_ioc/errors/missing_dependency_error.py -> build/lib/python_ioc/errors
+copying python_ioc/errors/__init__.py -> build/lib/python_ioc/errors
+copying python_ioc/errors/container_error.py -> build/lib/python_ioc/errors
+running egg_info
+writing python_ioc.egg-info/PKG-INFO
+writing dependency_links to python_ioc.egg-info/dependency_links.txt
+writing requirements to python_ioc.egg-info/requires.txt
+writing top-level names to python_ioc.egg-info/top_level.txt
+reading manifest file 'python_ioc.egg-info/SOURCES.txt'
+reading manifest template 'MANIFEST.in'
+adding license file 'LICENSE'
+writing manifest file 'python_ioc.egg-info/SOURCES.txt'
+installing to build/bdist.macosx-10.15-universal2/wheel
+running install
+running install_lib
+creating build/bdist.macosx-10.15-universal2/wheel
+creating build/bdist.macosx-10.15-universal2/wheel/python_ioc
+copying build/lib/python_ioc/lifetime.py -> build/bdist.macosx-10.15-universal2/wheel/./python_ioc
+copying build/lib/python_ioc/__init__.py -> build/bdist.macosx-10.15-universal2/wheel/./python_ioc
+copying build/lib/python_ioc/container.py -> build/bdist.macosx-10.15-universal2/wheel/./python_ioc
+copying build/lib/python_ioc/_service_descriptor.py -> build/bdist.macosx-10.15-universal2/wheel/./python_ioc
+creating build/bdist.macosx-10.15-universal2/wheel/python_ioc/errors
+copying build/lib/python_ioc/errors/circular_dependency_error.py -> build/bdist.macosx-10.15-universal2/wheel/./python_ioc/errors
+copying build/lib/python_ioc/errors/missing_dependency_error.py -> build/bdist.macosx-10.15-universal2/wheel/./python_ioc/errors
+copying build/lib/python_ioc/errors/__init__.py -> build/bdist.macosx-10.15-universal2/wheel/./python_ioc/errors
+copying build/lib/python_ioc/errors/container_error.py -> build/bdist.macosx-10.15-universal2/wheel/./python_ioc/errors
+copying build/lib/python_ioc/scope.py -> build/bdist.macosx-10.15-universal2/wheel/./python_ioc
+running install_egg_info
+Copying python_ioc.egg-info to build/bdist.macosx-10.15-universal2/wheel/./python_ioc-0.1.0-py3.14.egg-info
+running install_scripts
+creating build/bdist.macosx-10.15-universal2/wheel/python_ioc-0.1.0.dist-info/WHEEL
+creating '/Users/jesper/work/python-ioc/dist/.tmp-07memc5v/python_ioc-0.1.0-py3-none-any.whl' and adding 'build/bdist.macosx-10.15-universal2/wheel' to it
+adding 'python_ioc/__init__.py'
+adding 'python_ioc/_service_descriptor.py'
+adding 'python_ioc/container.py'
+adding 'python_ioc/lifetime.py'
+adding 'python_ioc/scope.py'
+adding 'python_ioc/errors/__init__.py'
+adding 'python_ioc/errors/circular_dependency_error.py'
+adding 'python_ioc/errors/container_error.py'
+adding 'python_ioc/errors/missing_dependency_error.py'
+adding 'python_ioc-0.1.0.dist-info/licenses/LICENSE'
+adding 'python_ioc-0.1.0.dist-info/METADATA'
+adding 'python_ioc-0.1.0.dist-info/WHEEL'
+adding 'python_ioc-0.1.0.dist-info/top_level.txt'
+adding 'python_ioc-0.1.0.dist-info/RECORD'
+removing build/bdist.macosx-10.15-universal2/wheel
+Successfully built python_ioc-0.1.0.tar.gz and python_ioc-0.1.0-py3-none-any.whl
+Uploading to PyPI...
+You will be prompted for your PyPI credentials if they are not configured in ~/.pypirc
+rm -rf build/
+rm -rf dist/
+rm -rf *.egg-info
+rm -rf .pytest_cache
+rm -rf .coverage
+rm -rf htmlcov/
+find . -type d -name __pycache__ -exec rm -rf {} +
+find . -type f -name '*.pyc' -delete
+python -m build
+* Creating isolated environment: venv+pip...
+* Installing packages in isolated environment:
+  - setuptools>=61.0
+  - wheel
+* Getting build dependencies for sdist...
+/private/var/folders/zz/p85ds1zx3tq9rt7fd3rh5g240000gn/T/build-env-hhffa52y/lib/python3.14/site-packages/setuptools/config/_apply_pyprojecttoml.py:82: SetuptoolsDeprecationWarning: `project.license` as a TOML table is deprecated
+!!
+        ********************************************************************************
+        Please use a simple string containing a SPDX expression for `project.license`. You can also use `project.license-files`. (Both options available on setuptools>=77.0.0).
+        By 2026-Feb-18, you need to update your project and remove deprecated calls
+        or your builds will no longer be supported.
+        See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+        ********************************************************************************
+!!
+  corresp(dist, value, root_dir)
+/private/var/folders/zz/p85ds1zx3tq9rt7fd3rh5g240000gn/T/build-env-hhffa52y/lib/python3.14/site-packages/setuptools/config/_apply_pyprojecttoml.py:61: SetuptoolsDeprecationWarning: License classifiers are deprecated.
+!!
+        ********************************************************************************
+        Please consider removing the following classifiers in favor of a SPDX license expression:
+        License :: OSI Approved :: MIT License
+        See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+        ********************************************************************************
+!!
+  dist._finalize_license_expression()
+/private/var/folders/zz/p85ds1zx3tq9rt7fd3rh5g240000gn/T/build-env-hhffa52y/lib/python3.14/site-packages/setuptools/dist.py:759: SetuptoolsDeprecationWarning: License classifiers are deprecated.
+!!
+        ********************************************************************************
+        Please consider removing the following classifiers in favor of a SPDX license expression:
+        License :: OSI Approved :: MIT License
+        See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+        ********************************************************************************
+!!
+  self._finalize_license_expression()
+running egg_info
+creating python_ioc.egg-info
+writing python_ioc.egg-info/PKG-INFO
+writing dependency_links to python_ioc.egg-info/dependency_links.txt
+writing requirements to python_ioc.egg-info/requires.txt
+writing top-level names to python_ioc.egg-info/top_level.txt
+writing manifest file 'python_ioc.egg-info/SOURCES.txt'
+reading manifest file 'python_ioc.egg-info/SOURCES.txt'
+reading manifest template 'MANIFEST.in'
+adding license file 'LICENSE'
+writing manifest file 'python_ioc.egg-info/SOURCES.txt'
+* Building sdist...
+/private/var/folders/zz/p85ds1zx3tq9rt7fd3rh5g240000gn/T/build-env-hhffa52y/lib/python3.14/site-packages/setuptools/config/_apply_pyprojecttoml.py:82: SetuptoolsDeprecationWarning: `project.license` as a TOML table is deprecated
+!!
+        ********************************************************************************
+        Please use a simple string containing a SPDX expression for `project.license`. You can also use `project.license-files`. (Both options available on setuptools>=77.0.0).
+        By 2026-Feb-18, you need to update your project and remove deprecated calls
+        or your builds will no longer be supported.
+        See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+        ********************************************************************************
+!!
+  corresp(dist, value, root_dir)
+/private/var/folders/zz/p85ds1zx3tq9rt7fd3rh5g240000gn/T/build-env-hhffa52y/lib/python3.14/site-packages/setuptools/config/_apply_pyprojecttoml.py:61: SetuptoolsDeprecationWarning: License classifiers are deprecated.
+!!
+        ********************************************************************************
+        Please consider removing the following classifiers in favor of a SPDX license expression:
+        License :: OSI Approved :: MIT License
+        See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+        ********************************************************************************
+!!
+  dist._finalize_license_expression()
+/private/var/folders/zz/p85ds1zx3tq9rt7fd3rh5g240000gn/T/build-env-hhffa52y/lib/python3.14/site-packages/setuptools/dist.py:759: SetuptoolsDeprecationWarning: License classifiers are deprecated.
+!!
+        ********************************************************************************
+        Please consider removing the following classifiers in favor of a SPDX license expression:
+        License :: OSI Approved :: MIT License
+        See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+        ********************************************************************************
+!!
+  self._finalize_license_expression()
+running sdist
+running egg_info
+writing python_ioc.egg-info/PKG-INFO
+writing dependency_links to python_ioc.egg-info/dependency_links.txt
+writing requirements to python_ioc.egg-info/requires.txt
+writing top-level names to python_ioc.egg-info/top_level.txt
+reading manifest file 'python_ioc.egg-info/SOURCES.txt'
+reading manifest template 'MANIFEST.in'
+adding license file 'LICENSE'
+writing manifest file 'python_ioc.egg-info/SOURCES.txt'
+running check
+creating python_ioc-0.1.0
+creating python_ioc-0.1.0/python_ioc
+creating python_ioc-0.1.0/python_ioc.egg-info
+creating python_ioc-0.1.0/python_ioc/errors
+creating python_ioc-0.1.0/tests
+copying files to python_ioc-0.1.0...
+copying LICENSE -> python_ioc-0.1.0
+copying MANIFEST.in -> python_ioc-0.1.0
+copying README.md -> python_ioc-0.1.0
+copying pyproject.toml -> python_ioc-0.1.0
+copying setup.py -> python_ioc-0.1.0
+copying python_ioc/__init__.py -> python_ioc-0.1.0/python_ioc
+copying python_ioc/_service_descriptor.py -> python_ioc-0.1.0/python_ioc
+copying python_ioc/container.py -> python_ioc-0.1.0/python_ioc
+copying python_ioc/lifetime.py -> python_ioc-0.1.0/python_ioc
+copying python_ioc/scope.py -> python_ioc-0.1.0/python_ioc
+copying python_ioc.egg-info/PKG-INFO -> python_ioc-0.1.0/python_ioc.egg-info
+copying python_ioc.egg-info/SOURCES.txt -> python_ioc-0.1.0/python_ioc.egg-info
+copying python_ioc.egg-info/dependency_links.txt -> python_ioc-0.1.0/python_ioc.egg-info
+copying python_ioc.egg-info/requires.txt -> python_ioc-0.1.0/python_ioc.egg-info
+copying python_ioc.egg-info/top_level.txt -> python_ioc-0.1.0/python_ioc.egg-info
+copying python_ioc/errors/__init__.py -> python_ioc-0.1.0/python_ioc/errors
+copying python_ioc/errors/circular_dependency_error.py -> python_ioc-0.1.0/python_ioc/errors
+copying python_ioc/errors/container_error.py -> python_ioc-0.1.0/python_ioc/errors
+copying python_ioc/errors/missing_dependency_error.py -> python_ioc-0.1.0/python_ioc/errors
+copying tests/__init__.py -> python_ioc-0.1.0/tests
+copying tests/test_container.py -> python_ioc-0.1.0/tests
+copying python_ioc.egg-info/SOURCES.txt -> python_ioc-0.1.0/python_ioc.egg-info
+Writing python_ioc-0.1.0/setup.cfg
+Creating tar archive
+removing 'python_ioc-0.1.0' (and everything under it)
+* Building wheel from sdist
+* Creating isolated environment: venv+pip...
+* Installing packages in isolated environment:
+  - setuptools>=61.0
+  - wheel
+* Getting build dependencies for wheel...
+/private/var/folders/zz/p85ds1zx3tq9rt7fd3rh5g240000gn/T/build-env-99u_7xvv/lib/python3.14/site-packages/setuptools/config/_apply_pyprojecttoml.py:82: SetuptoolsDeprecationWarning: `project.license` as a TOML table is deprecated
+!!
+        ********************************************************************************
+        Please use a simple string containing a SPDX expression for `project.license`. You can also use `project.license-files`. (Both options available on setuptools>=77.0.0).
+        By 2026-Feb-18, you need to update your project and remove deprecated calls
+        or your builds will no longer be supported.
+        See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+        ********************************************************************************
+!!
+  corresp(dist, value, root_dir)
+/private/var/folders/zz/p85ds1zx3tq9rt7fd3rh5g240000gn/T/build-env-99u_7xvv/lib/python3.14/site-packages/setuptools/config/_apply_pyprojecttoml.py:61: SetuptoolsDeprecationWarning: License classifiers are deprecated.
+!!
+        ********************************************************************************
+        Please consider removing the following classifiers in favor of a SPDX license expression:
+        License :: OSI Approved :: MIT License
+        See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+        ********************************************************************************
+!!
+  dist._finalize_license_expression()
+/private/var/folders/zz/p85ds1zx3tq9rt7fd3rh5g240000gn/T/build-env-99u_7xvv/lib/python3.14/site-packages/setuptools/dist.py:759: SetuptoolsDeprecationWarning: License classifiers are deprecated.
+!!
+        ********************************************************************************
+        Please consider removing the following classifiers in favor of a SPDX license expression:
+        License :: OSI Approved :: MIT License
+        See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+        ********************************************************************************
+!!
+  self._finalize_license_expression()
+running egg_info
+writing python_ioc.egg-info/PKG-INFO
+writing dependency_links to python_ioc.egg-info/dependency_links.txt
+writing requirements to python_ioc.egg-info/requires.txt
+writing top-level names to python_ioc.egg-info/top_level.txt
+reading manifest file 'python_ioc.egg-info/SOURCES.txt'
+reading manifest template 'MANIFEST.in'
+adding license file 'LICENSE'
+writing manifest file 'python_ioc.egg-info/SOURCES.txt'
+* Building wheel...
+/private/var/folders/zz/p85ds1zx3tq9rt7fd3rh5g240000gn/T/build-env-99u_7xvv/lib/python3.14/site-packages/setuptools/config/_apply_pyprojecttoml.py:82: SetuptoolsDeprecationWarning: `project.license` as a TOML table is deprecated
+!!
+        ********************************************************************************
+        Please use a simple string containing a SPDX expression for `project.license`. You can also use `project.license-files`. (Both options available on setuptools>=77.0.0).
+        By 2026-Feb-18, you need to update your project and remove deprecated calls
+        or your builds will no longer be supported.
+        See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+        ********************************************************************************
+!!
+  corresp(dist, value, root_dir)
+/private/var/folders/zz/p85ds1zx3tq9rt7fd3rh5g240000gn/T/build-env-99u_7xvv/lib/python3.14/site-packages/setuptools/config/_apply_pyprojecttoml.py:61: SetuptoolsDeprecationWarning: License classifiers are deprecated.
+!!
+        ********************************************************************************
+        Please consider removing the following classifiers in favor of a SPDX license expression:
+        License :: OSI Approved :: MIT License
+        See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+        ********************************************************************************
+!!
+  dist._finalize_license_expression()
+/private/var/folders/zz/p85ds1zx3tq9rt7fd3rh5g240000gn/T/build-env-99u_7xvv/lib/python3.14/site-packages/setuptools/dist.py:759: SetuptoolsDeprecationWarning: License classifiers are deprecated.
+!!
+        ********************************************************************************
+        Please consider removing the following classifiers in favor of a SPDX license expression:
+        License :: OSI Approved :: MIT License
+        See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+        ********************************************************************************
+!!
+  self._finalize_license_expression()
+running bdist_wheel
+running build
+running build_py
+creating build/lib/python_ioc
+copying python_ioc/lifetime.py -> build/lib/python_ioc
+copying python_ioc/__init__.py -> build/lib/python_ioc
+copying python_ioc/container.py -> build/lib/python_ioc
+copying python_ioc/_service_descriptor.py -> build/lib/python_ioc
+copying python_ioc/scope.py -> build/lib/python_ioc
+creating build/lib/python_ioc/errors
+copying python_ioc/errors/circular_dependency_error.py -> build/lib/python_ioc/errors
+copying python_ioc/errors/missing_dependency_error.py -> build/lib/python_ioc/errors
+copying python_ioc/errors/__init__.py -> build/lib/python_ioc/errors
+copying python_ioc/errors/container_error.py -> build/lib/python_ioc/errors
+running egg_info
+writing python_ioc.egg-info/PKG-INFO
+writing dependency_links to python_ioc.egg-info/dependency_links.txt
+writing requirements to python_ioc.egg-info/requires.txt
+writing top-level names to python_ioc.egg-info/top_level.txt
+reading manifest file 'python_ioc.egg-info/SOURCES.txt'
+reading manifest template 'MANIFEST.in'
+adding license file 'LICENSE'
+writing manifest file 'python_ioc.egg-info/SOURCES.txt'
+installing to build/bdist.macosx-10.15-universal2/wheel
+running install
+running install_lib
+creating build/bdist.macosx-10.15-universal2/wheel
+creating build/bdist.macosx-10.15-universal2/wheel/python_ioc
+copying build/lib/python_ioc/lifetime.py -> build/bdist.macosx-10.15-universal2/wheel/./python_ioc
+copying build/lib/python_ioc/__init__.py -> build/bdist.macosx-10.15-universal2/wheel/./python_ioc
+copying build/lib/python_ioc/container.py -> build/bdist.macosx-10.15-universal2/wheel/./python_ioc
+copying build/lib/python_ioc/_service_descriptor.py -> build/bdist.macosx-10.15-universal2/wheel/./python_ioc
+creating build/bdist.macosx-10.15-universal2/wheel/python_ioc/errors
+copying build/lib/python_ioc/errors/circular_dependency_error.py -> build/bdist.macosx-10.15-universal2/wheel/./python_ioc/errors
+copying build/lib/python_ioc/errors/missing_dependency_error.py -> build/bdist.macosx-10.15-universal2/wheel/./python_ioc/errors
+copying build/lib/python_ioc/errors/__init__.py -> build/bdist.macosx-10.15-universal2/wheel/./python_ioc/errors
+copying build/lib/python_ioc/errors/container_error.py -> build/bdist.macosx-10.15-universal2/wheel/./python_ioc/errors
+copying build/lib/python_ioc/scope.py -> build/bdist.macosx-10.15-universal2/wheel/./python_ioc
+running install_egg_info
+Copying python_ioc.egg-info to build/bdist.macosx-10.15-universal2/wheel/./python_ioc-0.1.0-py3.14.egg-info
+running install_scripts
+creating build/bdist.macosx-10.15-universal2/wheel/python_ioc-0.1.0.dist-info/WHEEL
+creating '/Users/jesper/work/python-ioc/dist/.tmp-ld313f3c/python_ioc-0.1.0-py3-none-any.whl' and adding 'build/bdist.macosx-10.15-universal2/wheel' to it
+adding 'python_ioc/__init__.py'
+adding 'python_ioc/_service_descriptor.py'
+adding 'python_ioc/container.py'
+adding 'python_ioc/lifetime.py'
+adding 'python_ioc/scope.py'
+adding 'python_ioc/errors/__init__.py'
+adding 'python_ioc/errors/circular_dependency_error.py'
+adding 'python_ioc/errors/container_error.py'
+adding 'python_ioc/errors/missing_dependency_error.py'
+adding 'python_ioc-0.1.0.dist-info/licenses/LICENSE'
+adding 'python_ioc-0.1.0.dist-info/METADATA'
+adding 'python_ioc-0.1.0.dist-info/WHEEL'
+adding 'python_ioc-0.1.0.dist-info/top_level.txt'
+adding 'python_ioc-0.1.0.dist-info/RECORD'
+removing build/bdist.macosx-10.15-universal2/wheel
+Successfully built python_ioc-0.1.0.tar.gz and python_ioc-0.1.0-py3-none-any.whl
+python -m twine upload dist/*
+/Users/jesper/work/python-ioc/.venv/bin/python: No module named twine
+make: *** [upload] Error 1

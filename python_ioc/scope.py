@@ -26,7 +26,7 @@ class Scope:
     def __enter__(self) -> "Scope":
         return self
 
-    def __exit__(self, *args):
+    def __exit__(self, *args: object) -> None:
         self._scoped_cache.clear()
 
     def resolve(self, service_type: type[T]) -> T:

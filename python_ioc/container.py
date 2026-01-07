@@ -11,7 +11,7 @@ Features:
 
 import inspect
 from collections.abc import Callable
-from typing import Protocol, TypeVar, get_type_hints
+from typing import Any, TypeVar, get_type_hints, cast
 from python_ioc._service_descriptor import _ServiceDescriptor
 from python_ioc.errors.circular_dependency_error import CircularDependencyError
 from python_ioc.errors.container_error import ContainerError
@@ -37,48 +37,50 @@ class Container:
 
         with container.scope() as scope:
             sender = scope.resolve(EmailSender)
-        """
-    def __init__(self):
+    """
+
+    def __init__(self) -> None:
         self._descriptors: dict[type, _ServiceDescriptor] = {}
         self._singletons: dict[type, object] = {}
 
-    def transient(self,
-                  service_type: type[T],
-                  implementation: type[T] | Callable[..., T] | None = None
-                  ) -> "Container":
+    def transient(
+        self,
+        service_type: type[T],
+        implementation: type[T] | Callable[..., T] | None = None,
+    ) -> "Container":
         """Register a class with 'transient' lifetime."""
         return self._register(service_type, implementation, Lifetime.TRANSIENT)
 
-    def scoped(self,
-               service_type: type[T],
-               implementation: type[T] | Callable[..., T] | None = None
-               ) -> "Container":
+    def scoped(
+        self,
+        service_type: type[T],
+        implementation: type[T] | Callable[..., T] | None = None,
+    ) -> "Container":
         """Register a class with 'scoped' lifetime."""
         return self._register(service_type, implementation, Lifetime.SCOPED)
 
-    def singleton(self,
-                  service_type: type[T],
-                  implementation: type[T] | Callable[..., T] | None = None
-                  ) -> "Container":
+    def singleton(
+        self,
+        service_type: type[T],
+        implementation: type[T] | Callable[..., T] | None = None,
+    ) -> "Container":
         """Register a class with 'singleton' lifetime."""
         return self._register(service_type, implementation, Lifetime.SINGLETON)
 
-    def instance(self,
-                 service_type: type[T],
-                 obj: T) -> "Container":
+    def instance(self, service_type: type[T], obj: T) -> "Container":
         """Register an existing instance as a singleton"""
         self._descriptors[service_type] = _ServiceDescriptor(
-            service_type=service_type,
-            instance=obj,
-            lifetime=Lifetime.SINGLETON
+            service_type=service_type, instance=obj, lifetime=Lifetime.SINGLETON
         )
         self._singletons[service_type] = obj
         return self
 
-    def factory(self,
-                service_type: type[T],
-                factory_fn: Callable[..., T],
-                lifetime: Lifetime = Lifetime.TRANSIENT) -> "Container":
+    def factory(
+        self,
+        service_type: type[T],
+        factory_fn: Callable[..., T],
+        lifetime: Lifetime = Lifetime.TRANSIENT,
+    ) -> "Container":
         """
         Register a factory function for creating instances.
 
@@ -95,15 +97,11 @@ class Container:
             container.factory(Connection, create_connection)
         """
         self._descriptors[service_type] = _ServiceDescriptor(
-            service_type=service_type,
-            factory=factory_fn,
-            lifetime=lifetime
+            service_type=service_type, factory=factory_fn, lifetime=lifetime
         )
         return self
 
-    def decorate(self,
-                 service_type: type[T],
-                 decorator_type: type[T]) -> "Container":
+    def decorate(self, service_type: type[T], decorator_type: type[T]) -> "Container":
         """
         Add a decorator around a service.
 
@@ -129,30 +127,28 @@ class Container:
             container.decorate(UserRepository, CachedUserRepository)
         """
         if service_type not in self._descriptors:
-            raise ConnectionError   (
+            raise ConnectionError(
                 f"Cannot decorate '{service_type.__name__}': not registered"
                 "Register the service before applying decorators."
             )
         self._descriptors[service_type].decorators.append(decorator_type)
         return self
 
-    def _register(self,
-                  service_type: type,
-                  implementation: type | Callable | None,
-                  lifetime: Lifetime) -> "Container":
+    def _register(
+        self,
+        service_type: type,
+        implementation: type | Callable | None,
+        lifetime: Lifetime,
+    ) -> "Container":
         impl = implementation or service_type
 
         if callable(impl) and not isinstance(impl, type):
             descriptor = _ServiceDescriptor(
-                service_type=service_type,
-                factory=impl,
-                lifetime=lifetime
+                service_type=service_type, factory=impl, lifetime=lifetime
             )
         else:
             descriptor = _ServiceDescriptor(
-                service_type=service_type,
-                implementation=impl,
-                lifetime=lifetime
+                service_type=service_type, implementation=impl, lifetime=lifetime
             )
         self._descriptors[service_type] = descriptor
         return self
@@ -174,9 +170,7 @@ class Container:
             self._validate_service(service_type, set())
         return self
 
-    def _validate_service(self,
-                          service_type: type,
-                          visited: set[type]) -> Lifetime:
+    def _validate_service(self, service_type: type, visited: set[type]) -> Lifetime:
         """Validate a service and return its effective lifetime."""
         if service_type in visited:
             raise CircularDependencyError(list(visited) + [service_type])
@@ -202,9 +196,13 @@ class Container:
 
             dep_lifetime = self._validate_service(deps_type, visited)
 
-            if (descriptor.lifetime == Lifetime.SINGLETON and dep_lifetime == Lifetime.SCOPED):
-                raise ContainerError(f"Lifetime mismatch: singleton '{service_type.__name__}' "
-                                     f"cannot depend on scoped '{deps_type.__name__}'"
+            if (
+                descriptor.lifetime == Lifetime.SINGLETON
+                and dep_lifetime == Lifetime.SCOPED
+            ):
+                raise ContainerError(
+                    f"Lifetime mismatch: singleton '{service_type.__name__}' "
+                    f"cannot depend on scoped '{deps_type.__name__}'"
                 )
         # validate decorators
         for decorator_type in descriptor.decorators:
@@ -218,9 +216,9 @@ class Container:
 
         return descriptor.lifetime
 
-    def _get_dependencies(self, target: Callable) -> list[type]:
+    def _get_dependencies(self, target: Callable[..., Any]) -> list[type[Any]]:
         """Extract dependency types from a callable's type hints."""
-        init = target.__init__ if isinstance(target, type) else target
+        init = cast(Any, target).__init__ if isinstance(target, type) else target
 
         try:
             hints = get_type_hints(init)
@@ -265,10 +263,10 @@ class Container:
         return Scope(self)
 
     def _resolve(
-            self,
-            service_type: type[T],
-            scoped_cache: dict[type, object],
-            resolution_chain: set[type]
+        self,
+        service_type: type[T],
+        scoped_cache: dict[type, object],
+        resolution_chain: set[type],
     ) -> T:
         # Circular dependency check
         if service_type in resolution_chain:
@@ -281,9 +279,9 @@ class Container:
         # Check caches (before decoration - we cache the final decorated instance)
         match descriptor.lifetime:
             case Lifetime.SINGLETON if service_type in self._singletons:
-                return self._singletons[service_type]
+                return cast(T, self._singletons[service_type])
             case Lifetime.SCOPED if service_type in scoped_cache:
-                return scoped_cache[service_type]
+                return cast(T, scoped_cache[service_type])
 
         resolution_chain = resolution_chain | {service_type}
 
@@ -293,11 +291,7 @@ class Container:
         # Apply decorators (in order: first decorator wraps the base)
         for decorator_type in descriptor.decorators:
             instance = self._create_decorator(
-                decorator_type,
-                service_type,
-                instance,
-                scoped_cache,
-                resolution_chain
+                decorator_type, service_type, instance, scoped_cache, resolution_chain
             )
 
         # Cache the final decorated instance
@@ -307,13 +301,13 @@ class Container:
             case Lifetime.SCOPED:
                 scoped_cache[service_type] = instance
 
-        return instance
+        return cast(T, instance)
 
     def _create(
-            self,
-            descriptor: _ServiceDescriptor,
-            scoped_cache: dict[type, object],
-            resolution_chain: set[type]
+        self,
+        descriptor: _ServiceDescriptor,
+        scoped_cache: dict[type, object],
+        resolution_chain: set[type],
     ) -> object:
         if descriptor.instance is not None:
             return descriptor.instance
@@ -327,15 +321,15 @@ class Container:
         return self._inject(target, scoped_cache, resolution_chain)
 
     def _create_decorator(
-            self,
-            decorator_type: type,
-            service_type: type,
-            inner_instance: object,
-            scoped_cache: dict[type, object],
-            resolution_chain: set[type]
+        self,
+        decorator_type: type[Any],
+        service_type: type[Any],
+        inner_instance: object,
+        scoped_cache: dict[type[Any], object],
+        resolution_chain: set[type[Any]],
     ) -> object:
         """Create a decorator instance, injecting the inner instance."""
-        init = decorator_type.__init__
+        init = cast(Any, decorator_type).__init__
 
         try:
             hints = get_type_hints(init)
@@ -357,7 +351,7 @@ class Container:
 
             # If this parameter expects the decorated type, inject the inner instance
             if hint == service_type or (
-                    isinstance(hint, type) and issubclass(service_type, hint)
+                isinstance(hint, type) and issubclass(service_type, hint)
             ):
                 kwargs[name] = inner_instance
             elif hint in self._descriptors:
@@ -366,13 +360,13 @@ class Container:
         return decorator_type(**kwargs)
 
     def _inject(
-            self,
-            target: Callable,
-            scoped_cache: dict[type, object],
-            resolution_chain: set[type]
+        self,
+        target: Callable[..., Any],
+        scoped_cache: dict[type[Any], object],
+        resolution_chain: set[type[Any]],
     ) -> object:
         """Call target with dependencies injected based on type hints."""
-        init = target.__init__ if isinstance(target, type) else target
+        init = cast(Any, target).__init__ if isinstance(target, type) else target
 
         try:
             hints = get_type_hints(init)
