@@ -571,46 +571,29 @@ Done!
 ============================================================
 ```
 
-## Development
+### Development
 
-### Setup
-
-Clone the repository and install development dependencies:
+A `Makefile` is provided for common development tasks:
 
 ```bash
-git clone https://github.com/yourusername/python-ioc.git
-cd python-ioc
-pip install -e ".[dev]"
+make install-dev   # Install development dependencies
+make test          # Run tests
+make coverage      # Run tests with coverage report
+make lint          # Run linting checks (flake8)
+make format        # Format code (black)
+make type-check    # Run type checking (mypy)
+make build         # Build the package
 ```
 
-### Running Tests
+### CI/CD
 
+This project uses GitHub Actions for CI/CD:
+- **CI**: Runs tests, linting, and type checking on every push to `main` and pull requests.
+- **Release**: Automatically builds and publishes the package to PyPI when a new tag `v*` is pushed.
+
+To publish manually, you can use the provided script:
 ```bash
-pytest
-```
-
-### Running Tests with Coverage
-
-```bash
-pytest --cov=python_ioc --cov-report=html
-```
-
-### Code Formatting
-
-```bash
-black .
-```
-
-### Linting
-
-```bash
-flake8 python_ioc tests
-```
-
-### Type Checking
-
-```bash
-mypy python_ioc
+./scripts/publish.sh
 ```
 
 ## License
