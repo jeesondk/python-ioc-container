@@ -3,7 +3,7 @@ requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "j^2-ioc"
+name = "j2-ioc"
 version = "0.1.0"
 description = "A Python IoC (Inversion of Control) container"
 readme = "README.md"
