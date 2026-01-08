@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "j2-ioc"
-version = "1.0.2"
+version = "1.0.4"
 description = "A Python IoC (Inversion of Control) container"
 readme = "README.md"
 authors = [
