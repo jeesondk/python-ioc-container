@@ -15,7 +15,7 @@ A lightweight, type-safe IoC (Inversion of Control) container for Python with co
 ## Installation
 
 ```bash
-pip install python-ioc
+pip install j2-ioc
 ```
 
 ## Quick Start
