@@ -1,4 +1,4 @@
-# Python IoC
+# J² IoC
 
 A lightweight, type-safe IoC (Inversion of Control) container for Python with constructor injection, decorator pattern support, and comprehensive validation.
 
