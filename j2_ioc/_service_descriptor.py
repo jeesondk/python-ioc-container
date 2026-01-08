@@ -1,6 +1,6 @@
 from dataclasses import field, dataclass
 from collections.abc import Callable
-from python_ioc.lifetime import Lifetime
+from j2_ioc.lifetime import Lifetime
 
 
 @dataclass

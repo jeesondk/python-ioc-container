@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "j2-ioc"
-version = "1.0.5"
+version = "1.0.6"
 description = "A Python IoC (Inversion of Control) container"
 readme = "README.md"
 authors = [
@@ -45,7 +45,7 @@ python_classes = ["Test*"]
 python_functions = ["test_*"]
 addopts = [
     "--verbose",
-    "--cov=python_ioc",
+    "--cov=j2_ioc",
     "--cov-report=term-missing",
     "--cov-report=html",
 ]
@@ -64,7 +64,7 @@ warn_unused_configs = true
 disallow_untyped_defs = true
 
 [tool.coverage.run]
-source = ["python_ioc"]
+source = ["j2_ioc"]
 omit = ["*/tests/*", "*/test_*.py"]
 
 [tool.coverage.report]

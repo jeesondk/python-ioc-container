@@ -8,8 +8,8 @@ __version__ = "0.1.0"
 __author__ = "Your Name"
 __email__ = "your.email@example.com"
 
-from python_ioc.container import Container
-from python_ioc.lifetime import Lifetime
-from python_ioc.scope import Scope
+from j2_ioc.container import Container
+from j2_ioc.lifetime import Lifetime
+from j2_ioc.scope import Scope
 
 __all__ = ["Container", "Lifetime", "Scope"]

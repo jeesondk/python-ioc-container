@@ -25,16 +25,16 @@ test:
 	pytest
 
 coverage:
-	pytest --cov=python_ioc --cov-report=term-missing --cov-report=html
+	pytest --cov=j2_ioc --cov-report=term-missing --cov-report=html
 
 lint:
-	flake8 python_ioc tests
+	flake8 j2_ioc tests
 
 format:
-	black python_ioc tests
+	black j2_ioc tests
 
 type-check:
-	mypy python_ioc
+	mypy j2_ioc
 
 clean:
 	rm -rf build/

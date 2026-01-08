@@ -2,10 +2,10 @@
 
 from typing import TYPE_CHECKING, TypeVar
 
-from python_ioc.errors.missing_dependency_error import MissingDependencyError
+from j2_ioc.errors.missing_dependency_error import MissingDependencyError
 
 if TYPE_CHECKING:
-    from python_ioc.container import Container
+    from j2_ioc.container import Container
 
 T = TypeVar("T")
 

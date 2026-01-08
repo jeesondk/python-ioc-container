@@ -1,6 +1,6 @@
 include README.md
 include LICENSE
 include pyproject.toml
-recursive-include python_ioc *.py
+recursive-include k2_ioc *.py
 recursive-include tests *.py
 

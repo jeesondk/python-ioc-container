@@ -1,4 +1,4 @@
-from python_ioc.errors.container_error import ContainerError
+from j2_ioc.errors.container_error import ContainerError
 
 
 class MissingDependencyError(ContainerError):

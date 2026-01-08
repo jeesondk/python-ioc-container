@@ -58,24 +58,24 @@ When reporting issues, please include:
 ### Making Changes
 
 ```
-mypy python_ioc
+mypy j2_ioc
 ```bash
 Type check with mypy:
 
 ```
-flake8 python_ioc tests
+flake8 j2_ioc tests
 ```bash
 Lint code with flake8:
 
 ```
-black python_ioc tests
+black j2_ioc tests
 ```bash
 Format code with black:
 
 ### Code Quality
 
 ```
-pytest --cov=python_ioc --cov-report=html
+pytest --cov=j2_ioc --cov-report=html
 ```bash
 Run tests with coverage:
 

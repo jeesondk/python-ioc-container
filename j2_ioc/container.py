@@ -12,12 +12,12 @@ Features:
 import inspect
 from collections.abc import Callable
 from typing import Any, TypeVar, get_type_hints, cast
-from python_ioc._service_descriptor import _ServiceDescriptor
-from python_ioc.errors.circular_dependency_error import CircularDependencyError
-from python_ioc.errors.container_error import ContainerError
-from python_ioc.errors.missing_dependency_error import MissingDependencyError
-from python_ioc.lifetime import Lifetime
-from python_ioc.scope import Scope
+from j2_ioc._service_descriptor import _ServiceDescriptor
+from j2_ioc.errors.circular_dependency_error import CircularDependencyError
+from j2_ioc.errors.container_error import ContainerError
+from j2_ioc.errors.missing_dependency_error import MissingDependencyError
+from j2_ioc.lifetime import Lifetime
+from j2_ioc.scope import Scope
 
 T = TypeVar("T")
 

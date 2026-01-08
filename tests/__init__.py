@@ -1,1 +1,1 @@
-"""Tests for the python_ioc package."""
+"""Tests for the j2_ioc package."""

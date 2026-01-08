@@ -21,7 +21,7 @@ pip install j2-ioc
 ## Quick Start
 
 ```python
-from python_ioc import Container, Lifetime
+from j2_ioc import Container, Lifetime
 
 # Define your abstractions
 class UserRepository(ABC):
@@ -126,7 +126,7 @@ Validation checks for:
 
 ```python
 from abc import ABC, abstractmethod
-from python_ioc import Container
+from j2_ioc import Container
 
 # Abstract base class as contract
 class UserRepository(ABC):
@@ -166,7 +166,7 @@ with container.scope() as scope:
 
 ```python
 from typing import Protocol, runtime_checkable
-from python_ioc import Container
+from j2_ioc import Container
 
 @runtime_checkable
 class UserRepository(Protocol):
@@ -195,7 +195,7 @@ Python-IoC works great with FastAPI for managing request-scoped dependencies:
 ```python
 from abc import ABC, abstractmethod
 from fastapi import FastAPI, Request
-from python_ioc import Container
+from j2_ioc import Container
 
 # Define your services
 class Database(ABC):
@@ -274,7 +274,7 @@ For a more FastAPI-idiomatic approach using dependency injection:
 
 ```python
 from fastapi import Depends, FastAPI
-from python_ioc import Container
+from j2_ioc import Container
 
 # Configure container (same as above)
 container = Container().scoped(Database, PostgresDatabase).scoped(UserService)
@@ -296,8 +296,8 @@ async def get_users(user_service: UserService = Depends(get_user_service)):
 
 ```python
 from abc import ABC, abstractmethod
-from python_ioc import Container, Lifetime
-from python_ioc.errors import (
+from j2_ioc import Container, Lifetime
+from j2_ioc.errors import (
     CircularDependencyError,
     ContainerError,
     MissingDependencyError

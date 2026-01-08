@@ -6,8 +6,8 @@
 
 if __name__ == "__main__":
     from abc import ABC, abstractmethod
-    from python_ioc import Container, Lifetime
-    from python_ioc.errors import (
+    from j2_ioc import Container, Lifetime
+    from j2_ioc.errors import (
         CircularDependencyError,
         ContainerError,
         MissingDependencyError
