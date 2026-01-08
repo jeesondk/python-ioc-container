@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "j2-ioc"
-version = "1.0.1"
+version = "1.0.2"
 description = "A Python IoC (Inversion of Control) container"
 readme = "README.md"
 authors = [
@@ -34,9 +34,9 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/yourusername/python-ioc"
-Repository = "https://github.com/yourusername/python-ioc"
-"Bug Tracker" = "https://github.com/yourusername/python-ioc/issues"
+Homepage = "https://github.com/jeesondk/python-ioc-container/"
+Repository = "https://github.com/jeesondk/python-ioc-container/"
+"Bug Tracker" = "https://github.com/jeesondk/python-ioc-container/"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
